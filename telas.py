@@ -17,9 +17,9 @@ def init(screen):
         screen.blit(texto2, (LARGURA // 2 - texto2.get_width() // 2, ALTURA // 2 - texto2.get_height()))
 
         # Botão de iniciar
-        pygame.draw.rect(TELA, VERMELHO, (x_centro_botao, y_centro_botao, LARGURA_BOTAO, ALTURA_BOTAO))
+        pygame.draw.rect(screen, VERMELHO, (x_centro_botao, y_centro_botao, LARGURA_BOTAO, ALTURA_BOTAO))
         texto_botao = fonte.render("Iniciar", True, BRANCO)
-        TELA.blit(texto_botao, (x_centro_botao + (LARGURA_BOTAO - texto_botao.get_width()) // 2, y_centro_botao + (ALTURA_BOTAO - texto_botao.get_height()) // 2))
+        screen.blit(texto_botao, (x_centro_botao + (LARGURA_BOTAO - texto_botao.get_width()) // 2, y_centro_botao + (ALTURA_BOTAO - texto_botao.get_height()) // 2))
 
         # Texto explicativo
         texto_explicativo = pygame.font.Font(None, 36).render("Aperte ESPAÇO ou clique no botão para iniciar", True, PRETO)
@@ -50,13 +50,18 @@ def game_over(screen):
         # Fundo da tela
         screen.fill(PRETO)
         texto = fonte.render("Game Over", True, BRANCO)
-        screen.blit(texto, (LARGURA // 2 - texto.get_width() // 2, ALTURA // 2 - texto.get_height() // 2))
-        pygame.display.flip()
+        screen.blit(texto, (LARGURA // 2 - texto.get_width() // 2, ALTURA // 2 - texto.get_height() - 100))
 
-        # Botão de iniciar
-        pygame.draw.rect(TELA, VERMELHO, (x_centro_botao, y_centro_botao, LARGURA_BOTAO, ALTURA_BOTAO)) 
-        texto = fonte.render("Aperte ESPAÇO para jogar novamente ou clique no botão acima", True, BRANCO)
-        screen.blit(texto, (LARGURA // 2 - texto.get_width() // 2, ALTURA // 2 - 50))
+        # Botão de reiniciar
+        pygame.draw.rect(screen, VERMELHO, (x_centro_botao, y_centro_botao, LARGURA_BOTAO, ALTURA_BOTAO))
+        texto_botao = fonte.render("Jogar", True, BRANCO)
+        screen.blit(texto_botao, (x_centro_botao + (LARGURA_BOTAO - texto_botao.get_width()) // 2, y_centro_botao + (ALTURA_BOTAO - texto_botao.get_height()) // 2))
+
+        # Texto explicativo
+        texto_explicativo = pygame.font.Font(None, 36).render("Aperte ESPAÇO ou clique no botão para REINICIAR o jogo", True, BRANCO)
+        screen.blit(texto_explicativo, (LARGURA // 2 - texto_explicativo.get_width() // 2, y_centro_botao + ALTURA_BOTAO + 20))
+
+        pygame.display.flip()
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
